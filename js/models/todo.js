@@ -24,6 +24,7 @@ var app = app || {};
 			});
 		},
 
+		// Toggle the 'priority' state of this todo item.
 		togglePriority: function () {
 			this.save({
 				priority: !this.get('priority')

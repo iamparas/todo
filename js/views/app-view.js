@@ -30,6 +30,7 @@ var app = app || {};
 		initialize: function () {
 			this.allCheckbox = this.$('#toggle-all')[0];
 			this.$input = this.$('#new-todo');
+			this.$inputPriority = this.$('#new-todo-priority');
 			this.$footer = this.$('#footer');
 			this.$main = this.$('#main');
 			this.$list = $('#todo-list');
@@ -99,7 +100,8 @@ var app = app || {};
 			return {
 				title: this.$input.val().trim(),
 				order: app.todos.nextOrder(),
-				completed: false
+				completed: false,
+				priority: this.$inputPriority.is(":checked")
 			};
 		},
 
@@ -107,8 +109,10 @@ var app = app || {};
 		// persisting it to *localStorage*.
 		createOnEnter: function (e) {
 			if (e.which === ENTER_KEY && this.$input.val().trim()) {
+				console.log(this.newAttributes());
 				app.todos.create(this.newAttributes());
 				this.$input.val('');
+				this.$inputPriority.prop('checked');
 			}
 		},
 
